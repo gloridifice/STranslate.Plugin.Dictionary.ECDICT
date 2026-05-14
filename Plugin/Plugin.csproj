@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>STranslate.Plugin.Vocabulary.Anki</AssemblyName>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <LangVersion>preview</LangVersion>
+        <UseWPF>true</UseWPF>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <EnableAutoPackage>true</EnableAutoPackage>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <OutputPath>..\..\.artifacts\Debug\Plugins\STranslate.Plugin.Vocabulary.Anki\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <OutputPath>..\..\.artifacts\Release\Plugins\STranslate.Plugin.Vocabulary.Anki\</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="Languages\*.*">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="plugin.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="icon.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="STranslate.Plugin" Version="1.0.10" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.10.2.1" />
+    </ItemGroup>
+
+</Project>
