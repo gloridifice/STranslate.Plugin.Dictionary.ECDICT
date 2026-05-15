@@ -1,10 +1,10 @@
-{
-  "PluginID": "a1b2c3d4e5f64789abcde12345678901",
-  "Name": "Anki",
-  "Description": "Anki vocabulary plugin for STranslate",
+﻿{
+  "PluginID": "a1b2c3d4e5f64789abcde12345678902",
+  "Name": "ECDICT",
+  "Description": "Local English-Chinese dictionary powered by ECDICT database",
   "Author": "STranslate",
   "Version": "1.0.0",
   "Website": "https://github.com/ZGGSONG/STranslate",
-  "ExecuteFileName": "STranslate.Plugin.Vocabulary.Anki.dll",
+  "ExecuteFileName": "STranslate.Plugin.Dictionary.ECDICT.dll",
   "IconPath": "icon.png"
 }

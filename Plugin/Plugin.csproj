@@ -1,7 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>STranslate.Plugin.Vocabulary.Anki</AssemblyName>
         <TargetFramework>net10.0-windows</TargetFramework>
         <LangVersion>preview</LangVersion>
         <UseWPF>true</UseWPF>
@@ -10,14 +9,17 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <EnableAutoPackage>true</EnableAutoPackage>
+        <AssemblyName>STranslate.Plugin.Dictionary.ECDICT</AssemblyName>
+        <PackageId>Plugin</PackageId>
+        <RootNamespace>STranslate.Plugin.Dictionary.ECDICT</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <OutputPath>..\..\.artifacts\Debug\Plugins\STranslate.Plugin.Vocabulary.Anki\</OutputPath>
+        <OutputPath>..\.artifacts\Debug\Plugins\STranslate.Plugin.Dictionary.ECDICT\</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <OutputPath>..\..\.artifacts\Release\Plugins\STranslate.Plugin.Vocabulary.Anki\</OutputPath>
+        <OutputPath>..\.artifacts\Release\Plugins\STranslate.Plugin.Dictionary.ECDICT\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,7 +31,13 @@
         <Content Include="plugin.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
+        <Content Include="ecdict.db">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Content Include="icon.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="lemma.en.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
@@ -38,6 +46,8 @@
         <PackageReference Include="STranslate.Plugin" Version="1.0.10" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.10.2.1" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.4" />
+        <PackageReference Include="CsvHelper" Version="33.0.1" />
     </ItemGroup>
 
 </Project>

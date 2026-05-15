@@ -3,17 +3,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_AnkiConnectUrl">AnkiConnect URL</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_TestConnection">Test Connection</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_DeckName">Deck</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_ModelName">Note Type</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_FieldSource">Source Field</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_FieldTarget">Translation Field</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_Tags">Tags</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_AllowDuplicate">Allow Duplicates</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_DuplicateCheckField">Duplicate Check Field</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_ConnectionOK">Connected</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_ConnectionFail">Connection Failed</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_RefreshDecks">Refresh</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DictionaryPath">Dictionary Database Path</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DictionaryPath_Description">Path to ECDICT SQLite database file; uses plugin directory default if relative or empty</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_LemmaPath">Lemma Data Path</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_LemmaPath_Description">Path to lemma.en.txt for word form lemmatization (e.g. gave -> give)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableLemma">Enable Lemmatization</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableLemma_Description">Automatically reduce word variants to their base form</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableFuzzyMatch">Enable Fuzzy Match</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableFuzzyMatch_Description">Try stripword fuzzy matching when exact match fails</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_MaxFuzzyResults">Max Fuzzy Results</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_MaxFuzzyResults_Description">Maximum number of results to return during fuzzy matching</sys:String>
+
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DisplayOptions">Display Options</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DisplayOptions_Description">Choose what to show in query results</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPlurals">Show Plural Forms</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPastTense">Show Past Tense</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPastParticiple">Show Past Participle</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPresentParticiple">Show Present Participle / Gerund</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowThirdPersonSingular">Show Third-Person Singular</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowTags">Show Tags (Exam Levels etc.)</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowSourceInfo">Show Source Info (Collins Stars, Frequency etc.)</sys:String>
+
+    <!-- Anki / Vocabulary -->
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki">Anki Vocabulary</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki_Description">Save queried words to Anki</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey">Save Hotkey</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey_Description">Hotkey to trigger saving to Anki, e.g. Ctrl+S, Ctrl+Shift+S</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiConnectUrl">AnkiConnect URL</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_TestConnection">Test Connection</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionOK">Connection OK</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionFail">Connection Failed</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDeckName">Deck</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiModelName">Note Type</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldWord">Word Field</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldDefinition">Definition Field</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic">Phonetic Field</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic_Description">Optional, leave blank to skip saving phonetic</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiTags">Tags</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiAllowDuplicate">Allow Duplicate</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDuplicateCheckField">Duplicate Check Field</sys:String>
 
 </ResourceDictionary>

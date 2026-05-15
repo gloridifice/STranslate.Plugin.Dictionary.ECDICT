@@ -1,24 +1,45 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using STranslate.Plugin.Dictionary.ECDICT.Anki;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace STranslate.Plugin.Vocabulary.Anki.ViewModel;
+namespace STranslate.Plugin.Dictionary.ECDICT.ViewModel;
 
 public partial class SettingsViewModel : ObservableObject, IDisposable
 {
     private readonly IPluginContext _context;
     private readonly Settings _settings;
 
+    // Dictionary settings
+    [ObservableProperty] public partial string DictionaryPath { get; set; }
+    [ObservableProperty] public partial string LemmaPath { get; set; }
+    [ObservableProperty] public partial bool EnableLemma { get; set; }
+    [ObservableProperty] public partial bool EnableFuzzyMatch { get; set; }
+    [ObservableProperty] public partial int MaxFuzzyResults { get; set; }
+
+    // Display options
+    [ObservableProperty] public partial bool ShowPlurals { get; set; }
+    [ObservableProperty] public partial bool ShowPastTense { get; set; }
+    [ObservableProperty] public partial bool ShowPastParticiple { get; set; }
+    [ObservableProperty] public partial bool ShowPresentParticiple { get; set; }
+    [ObservableProperty] public partial bool ShowThirdPersonSingular { get; set; }
+    [ObservableProperty] public partial bool ShowTags { get; set; }
+    [ObservableProperty] public partial bool ShowSourceInfo { get; set; }
+
+    // Anki / Vocabulary settings
+    [ObservableProperty] public partial bool EnableAnkiSave { get; set; }
+    [ObservableProperty] public partial string SaveToAnkiHotkey { get; set; }
     [ObservableProperty] public partial string AnkiConnectUrl { get; set; }
-    [ObservableProperty] public partial string DeckName { get; set; }
-    [ObservableProperty] public partial string ModelName { get; set; }
-    [ObservableProperty] public partial string FieldMappingSource { get; set; }
-    [ObservableProperty] public partial string FieldMappingTarget { get; set; }
-    [ObservableProperty] public partial string Tags { get; set; }
-    [ObservableProperty] public partial bool AllowDuplicate { get; set; }
-    [ObservableProperty] public partial string DuplicateCheckField { get; set; }
+    [ObservableProperty] public partial string AnkiDeckName { get; set; }
+    [ObservableProperty] public partial string AnkiModelName { get; set; }
+    [ObservableProperty] public partial string AnkiFieldWord { get; set; }
+    [ObservableProperty] public partial string AnkiFieldDefinition { get; set; }
+    [ObservableProperty] public partial string AnkiFieldPhonetic { get; set; }
+    [ObservableProperty] public partial string AnkiTags { get; set; }
+    [ObservableProperty] public partial bool AnkiAllowDuplicate { get; set; }
+    [ObservableProperty] public partial string AnkiDuplicateCheckField { get; set; }
 
     [ObservableProperty] public partial bool IsConnected { get; set; }
     [ObservableProperty] public partial bool IsBusy { get; set; }
@@ -35,14 +56,34 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
         _context = context;
         _settings = settings;
 
+        // Dictionary
+        DictionaryPath = settings.DictionaryPath;
+        LemmaPath = settings.LemmaPath;
+        EnableLemma = settings.EnableLemma;
+        EnableFuzzyMatch = settings.EnableFuzzyMatch;
+        MaxFuzzyResults = settings.MaxFuzzyResults;
+
+        // Display
+        ShowPlurals = settings.ShowPlurals;
+        ShowPastTense = settings.ShowPastTense;
+        ShowPastParticiple = settings.ShowPastParticiple;
+        ShowPresentParticiple = settings.ShowPresentParticiple;
+        ShowThirdPersonSingular = settings.ShowThirdPersonSingular;
+        ShowTags = settings.ShowTags;
+        ShowSourceInfo = settings.ShowSourceInfo;
+
+        // Anki
+        EnableAnkiSave = settings.EnableAnkiSave;
+        SaveToAnkiHotkey = settings.SaveToAnkiHotkey;
         AnkiConnectUrl = settings.AnkiConnectUrl;
-        DeckName = settings.DeckName;
-        ModelName = settings.ModelName;
-        FieldMappingSource = settings.FieldMappingSource;
-        FieldMappingTarget = settings.FieldMappingTarget;
-        Tags = settings.Tags;
-        AllowDuplicate = settings.AllowDuplicate;
-        DuplicateCheckField = settings.DuplicateCheckField;
+        AnkiDeckName = settings.AnkiDeckName;
+        AnkiModelName = settings.AnkiModelName;
+        AnkiFieldWord = settings.AnkiFieldWord;
+        AnkiFieldDefinition = settings.AnkiFieldDefinition;
+        AnkiFieldPhonetic = settings.AnkiFieldPhonetic;
+        AnkiTags = settings.AnkiTags;
+        AnkiAllowDuplicate = settings.AnkiAllowDuplicate;
+        AnkiDuplicateCheckField = settings.AnkiDuplicateCheckField;
 
         PropertyChanged += OnPropertyChanged;
     }
@@ -55,31 +96,79 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
     {
         switch (e.PropertyName)
         {
+            // Dictionary
+            case nameof(DictionaryPath):
+                _settings.DictionaryPath = DictionaryPath;
+                break;
+            case nameof(LemmaPath):
+                _settings.LemmaPath = LemmaPath;
+                break;
+            case nameof(EnableLemma):
+                _settings.EnableLemma = EnableLemma;
+                break;
+            case nameof(EnableFuzzyMatch):
+                _settings.EnableFuzzyMatch = EnableFuzzyMatch;
+                break;
+            case nameof(MaxFuzzyResults):
+                _settings.MaxFuzzyResults = MaxFuzzyResults;
+                break;
+            // Display
+            case nameof(ShowPlurals):
+                _settings.ShowPlurals = ShowPlurals;
+                break;
+            case nameof(ShowPastTense):
+                _settings.ShowPastTense = ShowPastTense;
+                break;
+            case nameof(ShowPastParticiple):
+                _settings.ShowPastParticiple = ShowPastParticiple;
+                break;
+            case nameof(ShowPresentParticiple):
+                _settings.ShowPresentParticiple = ShowPresentParticiple;
+                break;
+            case nameof(ShowThirdPersonSingular):
+                _settings.ShowThirdPersonSingular = ShowThirdPersonSingular;
+                break;
+            case nameof(ShowTags):
+                _settings.ShowTags = ShowTags;
+                break;
+            case nameof(ShowSourceInfo):
+                _settings.ShowSourceInfo = ShowSourceInfo;
+                break;
+            // Anki
+            case nameof(EnableAnkiSave):
+                _settings.EnableAnkiSave = EnableAnkiSave;
+                break;
+            case nameof(SaveToAnkiHotkey):
+                _settings.SaveToAnkiHotkey = SaveToAnkiHotkey;
+                break;
             case nameof(AnkiConnectUrl):
                 _settings.AnkiConnectUrl = AnkiConnectUrl;
                 _client = null;
                 IsConnected = false;
                 break;
-            case nameof(DeckName):
-                _settings.DeckName = DeckName;
+            case nameof(AnkiDeckName):
+                _settings.AnkiDeckName = AnkiDeckName;
                 break;
-            case nameof(ModelName):
-                _settings.ModelName = ModelName;
+            case nameof(AnkiModelName):
+                _settings.AnkiModelName = AnkiModelName;
                 break;
-            case nameof(FieldMappingSource):
-                _settings.FieldMappingSource = FieldMappingSource;
+            case nameof(AnkiFieldWord):
+                _settings.AnkiFieldWord = AnkiFieldWord;
                 break;
-            case nameof(FieldMappingTarget):
-                _settings.FieldMappingTarget = FieldMappingTarget;
+            case nameof(AnkiFieldDefinition):
+                _settings.AnkiFieldDefinition = AnkiFieldDefinition;
                 break;
-            case nameof(Tags):
-                _settings.Tags = Tags;
+            case nameof(AnkiFieldPhonetic):
+                _settings.AnkiFieldPhonetic = AnkiFieldPhonetic;
                 break;
-            case nameof(AllowDuplicate):
-                _settings.AllowDuplicate = AllowDuplicate;
+            case nameof(AnkiTags):
+                _settings.AnkiTags = AnkiTags;
                 break;
-            case nameof(DuplicateCheckField):
-                _settings.DuplicateCheckField = DuplicateCheckField;
+            case nameof(AnkiAllowDuplicate):
+                _settings.AnkiAllowDuplicate = AnkiAllowDuplicate;
+                break;
+            case nameof(AnkiDuplicateCheckField):
+                _settings.AnkiDuplicateCheckField = AnkiDuplicateCheckField;
                 break;
             default:
                 return;
@@ -129,9 +218,9 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
                 Decks.Add(deck);
             }
 
-            if (!string.IsNullOrEmpty(DeckName) && !Decks.Contains(DeckName))
+            if (!string.IsNullOrEmpty(AnkiDeckName) && !Decks.Contains(AnkiDeckName))
             {
-                DeckName = string.Empty;
+                AnkiDeckName = string.Empty;
             }
         }
         catch (Exception ex)
@@ -152,9 +241,9 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
                 Models.Add(model);
             }
 
-            if (!string.IsNullOrEmpty(ModelName) && !Models.Contains(ModelName))
+            if (!string.IsNullOrEmpty(AnkiModelName) && !Models.Contains(AnkiModelName))
             {
-                ModelName = string.Empty;
+                AnkiModelName = string.Empty;
             }
         }
         catch (Exception ex)
@@ -163,7 +252,7 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
         }
     }
 
-    partial void OnModelNameChanged(string value)
+    partial void OnAnkiModelNameChanged(string value)
     {
         _ = LoadFieldsAsync(value);
     }
@@ -186,10 +275,12 @@ public partial class SettingsViewModel : ObservableObject, IDisposable
 
             if (fields.Length > 0)
             {
-                if (!SourceFields.Contains(FieldMappingSource))
-                    FieldMappingSource = fields[0];
-                if (!TargetFields.Contains(FieldMappingTarget))
-                    FieldMappingTarget = fields.Length > 1 ? fields[1] : fields[0];
+                if (!SourceFields.Contains(AnkiFieldWord))
+                    AnkiFieldWord = fields[0];
+                if (!TargetFields.Contains(AnkiFieldDefinition))
+                    AnkiFieldDefinition = fields.Length > 1 ? fields[1] : fields[0];
+                if (!SourceFields.Contains(AnkiDuplicateCheckField))
+                    AnkiDuplicateCheckField = fields[0];
             }
         }
         catch (Exception ex)

@@ -1,6 +1,11 @@
-namespace STranslate.Plugin.Vocabulary.Anki.View;
+using System.Windows.Controls;
 
-public partial class SettingsView
+namespace STranslate.Plugin.Dictionary.ECDICT.View;
+
+public partial class SettingsView : UserControl
 {
-    public SettingsView() => InitializeComponent();
+    public SettingsView()
+    {
+        InitializeComponent();
+    }
 }

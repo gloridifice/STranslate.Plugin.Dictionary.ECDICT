@@ -3,17 +3,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_AnkiConnectUrl">AnkiConnect 地址</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_TestConnection">测试连接</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_DeckName">牌组</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_ModelName">笔记类型</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_FieldSource">源文本字段</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_FieldTarget">翻译字段</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_Tags">标签</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_AllowDuplicate">允许重复</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_DuplicateCheckField">去重检查字段</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_ConnectionOK">连接成功</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_ConnectionFail">连接失败</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Vocabulary_Anki_RefreshDecks">刷新</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DictionaryPath">词典数据库路径</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DictionaryPath_Description">ECDICT SQLite 数据库文件路径，留空或相对路径则使用插件目录下的默认文件</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_LemmaPath">词形还原数据路径</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_LemmaPath_Description">lemma.en.txt 文件路径，用于词形还原（如 gave -> give）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableLemma">启用词形还原</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableLemma_Description">查询单词变体时自动还原为原型词</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableFuzzyMatch">启用模糊匹配</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_EnableFuzzyMatch_Description">精确匹配失败时，尝试 stripword 模糊匹配</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_MaxFuzzyResults">最大模糊匹配数</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_MaxFuzzyResults_Description">模糊匹配时返回的最大结果数量</sys:String>
+
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DisplayOptions">显示选项</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_DisplayOptions_Description">选择要在查询结果中显示的内容</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPlurals">显示复数形式</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPastTense">显示过去式</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPastParticiple">显示过去分词</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowPresentParticiple">显示现在分词 / 动名词</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowThirdPersonSingular">显示第三人称单数</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowTags">显示标签（考试等级等）</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowSourceInfo">显示来源信息（柯林斯星级、词频等）</sys:String>
+
+    <!-- Anki / Vocabulary -->
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki">Anki 生词本</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki_Description">将查询到的单词保存到 Anki</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey">保存快捷键</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey_Description">触发保存到 Anki 的快捷键，如 Ctrl+S、Ctrl+Shift+S</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiConnectUrl">AnkiConnect 地址</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_TestConnection">测试连接</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionOK">连接成功</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionFail">连接失败</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDeckName">牌组</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiModelName">笔记类型</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldWord">单词字段</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldDefinition">释义字段</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic">音标字段</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic_Description">可选，留空则不保存音标</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiTags">标签</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiAllowDuplicate">允许重复</sys:String>
+    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDuplicateCheckField">去重检查字段</sys:String>
 
 </ResourceDictionary>
