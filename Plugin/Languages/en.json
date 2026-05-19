@@ -17,22 +17,5 @@
   "STranslate_Plugin_Dictionary_ECDICT_ShowPresentParticiple": "Show Present Participle / Gerund",
   "STranslate_Plugin_Dictionary_ECDICT_ShowThirdPersonSingular": "Show Third-Person Singular",
   "STranslate_Plugin_Dictionary_ECDICT_ShowTags": "Show Tags (Exam Levels etc.)",
-  "STranslate_Plugin_Dictionary_ECDICT_ShowSourceInfo": "Show Source Info (Collins Stars, Frequency etc.)",
-  "STranslate_Plugin_Dictionary_ECDICT_Anki": "Anki Vocabulary",
-  "STranslate_Plugin_Dictionary_ECDICT_Anki_Description": "Save queried words to Anki",
-  "STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey": "Save Hotkey",
-  "STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey_Description": "Hotkey to trigger saving to Anki, e.g. Ctrl+S, Ctrl+Shift+S",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiConnectUrl": "AnkiConnect URL",
-  "STranslate_Plugin_Dictionary_ECDICT_TestConnection": "Test Connection",
-  "STranslate_Plugin_Dictionary_ECDICT_ConnectionOK": "Connection OK",
-  "STranslate_Plugin_Dictionary_ECDICT_ConnectionFail": "Connection Failed",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiDeckName": "Deck",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiModelName": "Note Type",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiFieldWord": "Word Field",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiFieldDefinition": "Definition Field",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic": "Phonetic Field",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic_Description": "Optional, leave blank to skip saving phonetic",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiTags": "Tags",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiAllowDuplicate": "Allow Duplicate",
-  "STranslate_Plugin_Dictionary_ECDICT_AnkiDuplicateCheckField": "Duplicate Check Field"
+  "STranslate_Plugin_Dictionary_ECDICT_ShowSourceInfo": "Show Source Info (Collins Stars, Frequency etc.)"
 }

@@ -18,11 +18,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\STranslate.Plugin.Dictionary.ECDICT\STranslate.Plugin.Dictionary.ECDICT.csproj" />
-        <Content Include="..\STranslate.Plugin.Dictionary.ECDICT\ecdict.db">
+        <ProjectReference Include="..\Plugin\Plugin.csproj" />
+        <Content Include="..\Plugin\ecdict.db">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Include="..\STranslate.Plugin.Dictionary.ECDICT\lemma.en.txt">
+        <Content Include="..\Plugin\lemma.en.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>

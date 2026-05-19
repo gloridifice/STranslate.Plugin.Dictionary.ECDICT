@@ -24,23 +24,5 @@
     <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowTags">显示标签（考试等级等）</sys:String>
     <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowSourceInfo">显示来源信息（柯林斯星级、词频等）</sys:String>
 
-    <!-- Anki / Vocabulary -->
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki">Anki 生词本</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki_Description">将查询到的单词保存到 Anki</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey">保存快捷键</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey_Description">触发保存到 Anki 的快捷键，如 Ctrl+S、Ctrl+Shift+S</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiConnectUrl">AnkiConnect 地址</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_TestConnection">测试连接</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionOK">连接成功</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionFail">连接失败</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDeckName">牌组</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiModelName">笔记类型</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldWord">单词字段</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldDefinition">释义字段</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic">音标字段</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic_Description">可选，留空则不保存音标</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiTags">标签</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiAllowDuplicate">允许重复</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDuplicateCheckField">去重检查字段</sys:String>
 
 </ResourceDictionary>

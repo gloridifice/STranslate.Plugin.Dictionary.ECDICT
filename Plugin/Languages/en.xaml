@@ -24,23 +24,5 @@
     <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowTags">Show Tags (Exam Levels etc.)</sys:String>
     <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ShowSourceInfo">Show Source Info (Collins Stars, Frequency etc.)</sys:String>
 
-    <!-- Anki / Vocabulary -->
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki">Anki Vocabulary</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_Anki_Description">Save queried words to Anki</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey">Save Hotkey</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_SaveToAnkiHotkey_Description">Hotkey to trigger saving to Anki, e.g. Ctrl+S, Ctrl+Shift+S</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiConnectUrl">AnkiConnect URL</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_TestConnection">Test Connection</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionOK">Connection OK</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_ConnectionFail">Connection Failed</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDeckName">Deck</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiModelName">Note Type</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldWord">Word Field</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldDefinition">Definition Field</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic">Phonetic Field</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiFieldPhonetic_Description">Optional, leave blank to skip saving phonetic</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiTags">Tags</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiAllowDuplicate">Allow Duplicate</sys:String>
-    <sys:String x:Key="STranslate_Plugin_Dictionary_ECDICT_AnkiDuplicateCheckField">Duplicate Check Field</sys:String>
 
 </ResourceDictionary>

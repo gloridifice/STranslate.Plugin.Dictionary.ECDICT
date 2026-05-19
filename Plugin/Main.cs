@@ -1,17 +1,13 @@
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
-using STranslate.Plugin.Dictionary.ECDICT.Anki;
 using STranslate.Plugin.Dictionary.ECDICT.View;
 using STranslate.Plugin.Dictionary.ECDICT.ViewModel;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace STranslate.Plugin.Dictionary.ECDICT;
 
-public partial class Main : DictionaryPluginBase, IVocabularyPlugin
+public partial class Main : DictionaryPluginBase
 {
     private Control? _settingUi;
     private SettingsViewModel? _viewModel;
@@ -19,8 +15,6 @@ public partial class Main : DictionaryPluginBase, IVocabularyPlugin
     private IPluginContext Context { get; set; } = null!;
     private ECDictService DictService { get; } = new();
 
-    // Hotkey
-    private InputBinding? _hotkeyBinding;
 
     public override Control GetSettingUI()
     {
@@ -52,13 +46,11 @@ public partial class Main : DictionaryPluginBase, IVocabularyPlugin
             Context.Logger.LogError(ex, "Failed to initialize ECDICT database");
         }
 
-        // Register plugin-level hotkey on the main window
-        TryRegisterHotkey();
     }
 
     public override void Dispose()
     {
-        UnregisterHotkey();
+
         _viewModel?.Dispose();
         DictService.Dispose();
     }
@@ -141,222 +133,7 @@ public partial class Main : DictionaryPluginBase, IVocabularyPlugin
         await Task.CompletedTask;
     }
 
-    // ===================== IVocabularyPlugin =====================
 
-    public async Task<VocabularyResult> SaveAsync(string text, CancellationToken cancellationToken = default)
-    {
-        return await SaveToAnkiAsync(text, string.Empty, cancellationToken);
-    }
-
-    public async Task<VocabularyResult> SaveWithNoteAsync(string word, string note, CancellationToken cancellationToken = default)
-    {
-        return await SaveToAnkiAsync(word, note, cancellationToken);
-    }
-
-    // ===================== Internal helpers =====================
-
-    private async Task<VocabularyResult> SaveToAnkiAsync(string text, string note, CancellationToken cancellationToken = default)
-    {
-        var result = new VocabularyResult();
-        var startTime = DateTime.Now;
-
-        if (Settings?.EnableAnkiSave != true)
-        {
-            result.Fail("Anki 保存未启用");
-            return result;
-        }
-
-        try
-        {
-            var client = new AnkiConnectClient(Settings.AnkiConnectUrl, Context.HttpService);
-
-            if (!Settings.AnkiAllowDuplicate)
-            {
-                var exists = await CheckDuplicateAsync(client, text, cancellationToken);
-                if (exists)
-                {
-                    result.Fail("该词已存在于 Anki 中");
-                    return result;
-                }
-            }
-
-            // Query dictionary for the word to ensure we have definition
-            var entry = Settings.EnableLemma
-                ? DictService.QueryWithLemma(text)
-                : DictService.Query(text);
-
-            var noteObj = BuildAnkiNote(text, note, entry);
-            var noteId = await client.InvokeAsync<long>("addNote", new { note = noteObj }, cancellationToken);
-            result.IsSuccess = noteId > 0;
-
-            if (result.IsSuccess)
-            {
-                Context.Snackbar.ShowSuccess($"已保存到 Anki: {text}");
-            }
-        }
-        catch (AnkiConnectException ex)
-        {
-            result.Fail($"Anki 错误: {ex.Message}");
-            Context?.Logger.LogError(ex, "Anki addNote failed for text: {Text}", text);
-        }
-        catch (Exception ex)
-        {
-            result.Fail($"保存至 Anki 失败: {ex.Message}");
-            Context?.Logger.LogError(ex, "Save to Anki failed for text: {Text}", text);
-        }
-        finally
-        {
-            result.Duration = DateTime.Now - startTime;
-        }
-
-        return result;
-    }
-
-    private async Task<bool> CheckDuplicateAsync(AnkiConnectClient client, string text, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var query = $"\"{Settings.AnkiDuplicateCheckField}:{EscapeQuery(text)}\"";
-            var notes = await client.InvokeAsync<long[]>("findNotes", new { query }, cancellationToken);
-            return notes.Length > 0;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    private object BuildAnkiNote(string word, string note, WordEntry? entry)
-    {
-        var fields = new Dictionary<string, string>();
-
-        // Word field
-        if (!string.IsNullOrWhiteSpace(Settings.AnkiFieldWord))
-        {
-            fields[Settings.AnkiFieldWord] = word;
-        }
-
-        // Definition / note field
-        if (!string.IsNullOrWhiteSpace(Settings.AnkiFieldDefinition))
-        {
-            string definition = note;
-            definition = DictionaryResult.Text;
-            if (string.IsNullOrWhiteSpace(definition))
-            {
-                // Try to get definition from current DictionaryResult first
-                if (DictionaryResult?.ResultType == DictionaryResultType.Success && DictionaryResult.DictMeans.Count > 0)
-                {
-                    var lines = new List<string>();
-                    foreach (var mean in DictionaryResult.DictMeans)
-                    {
-                        var pos = string.IsNullOrWhiteSpace(mean.PartOfSpeech) ? "" : $"[{mean.PartOfSpeech}] ";
-                        lines.Add($"{pos}{string.Join("；", mean.Means)}");
-                    }
-                    definition = string.Join("\n", lines);
-                }
-                else if (entry != null)
-                {
-                    // Fallback: query the dictionary directly
-                    var meaningText = !string.IsNullOrWhiteSpace(entry.Translation)
-                        ? entry.Translation
-                        : entry.Definition;
-                    definition = meaningText ?? string.Empty;
-                }
-            }
-            //fields[Settings.AnkiFieldDefinition] = ""//definition ?? string.Empty;
-        }
-
-        // Phonetic field (optional)
-        if (!string.IsNullOrWhiteSpace(Settings.AnkiFieldPhonetic))
-        {
-            string? phonetic = null;
-            if (DictionaryResult?.Symbols.Count > 0)
-            {
-                phonetic = DictionaryResult.Symbols.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s.Phonetic))?.Phonetic;
-            }
-            if (string.IsNullOrWhiteSpace(phonetic) && entry != null)
-            {
-                phonetic = entry.Phonetic;
-            }
-            if (!string.IsNullOrWhiteSpace(phonetic))
-            {
-                fields[Settings.AnkiFieldPhonetic] = phonetic;
-            }
-        }
-
-        var tags = string.IsNullOrWhiteSpace(Settings.AnkiTags)
-            ? Array.Empty<string>()
-            : Settings.AnkiTags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-
-        return new
-        {
-            deckName = Settings.AnkiDeckName,
-            modelName = Settings.AnkiModelName,
-            fields,
-            tags
-        };
-    }
-
-    private static string EscapeQuery(string text)
-    {
-        return text.Replace("\"", "\\\"");
-    }
-
-    // ===================== Hotkey =====================
-
-    private void TryRegisterHotkey()
-    {
-        UnregisterHotkey();
-
-        if (!Settings.EnableAnkiSave || string.IsNullOrWhiteSpace(Settings.SaveToAnkiHotkey))
-            return;
-
-        try
-        {
-            var mainWindow = Application.Current?.MainWindow;
-            if (mainWindow == null)
-                return;
-
-            var gesture = (KeyGesture)new KeyGestureConverter().ConvertFrom(Settings.SaveToAnkiHotkey)!;
-            var command = new RelayCommand(async () =>
-            {
-                // When hotkey triggers, save the word currently shown in DictionaryResult
-                var word = DictionaryResult.Text;
-                if (string.IsNullOrWhiteSpace(word))
-                {
-                    Context.Snackbar.ShowError("没有可保存的单词，请先查询单词");
-                    return;
-                }
-                await SaveToAnkiAsync(word, string.Empty);
-            });
-
-            _hotkeyBinding = new InputBinding(command, gesture);
-            mainWindow.InputBindings.Add(_hotkeyBinding);
-
-            Context.Logger.LogInformation("Registered Anki save hotkey: {Hotkey}", Settings.SaveToAnkiHotkey);
-        }
-        catch (Exception ex)
-        {
-            Context.Logger.LogWarning(ex, "Failed to register Anki save hotkey: {Hotkey}", Settings.SaveToAnkiHotkey);
-        }
-    }
-
-    private void UnregisterHotkey()
-    {
-        if (_hotkeyBinding == null)
-            return;
-
-        try
-        {
-            Application.Current?.MainWindow?.InputBindings.Remove(_hotkeyBinding);
-        }
-        catch
-        {
-            // ignored
-        }
-
-        _hotkeyBinding = null;
-    }
 
     // ===================== Result population =====================
 
@@ -444,10 +221,10 @@ public partial class Main : DictionaryPluginBase, IVocabularyPlugin
                         if (Settings.ShowThirdPersonSingular) result.ThirdPersonSingular.Add(value);
                         break;
                     case "r":
-                        if (Settings.ShowPlurals) result.Comparative.Add(value);
+                        result.Comparative.Add(value);
                         break;
                     case "t":
-                        if (Settings.ShowPlurals) result.Superlative.Add(value);
+                        result.Superlative.Add(value);
                         break;
                 }
             }
